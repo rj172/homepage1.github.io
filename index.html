@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" 
+        integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+        <style>
+               
+                .carousel-inner img {
+                    width: 100%;
+                    height: 100%;
+                }
+                .carousel-caption {
+                    top: 50%;
+                    bottom: auto;
+                }
+                #back{
+                    background: url('./back.jpg');
+                    width: 100%;  
+                }
+                #logo{
+                    width: 100%;
+                    height: 100%;
+                }         
+                #a1{
+                    top:50%;
+                }
+                .bigger {
+                    margin: 0;
+                    font-size: 40px;
+                    font-weight: 800;
+                    font-family:cursive; 
+                    padding: 20px;
+                    text-transform: uppercase;
+                    color: #202020;
+                    display: inline-block;
+                    position: relative;
+                  }
+                  
+                  
+                  .text {
+                    max-width: 600px;
+                    width: 100%;
+                    font-family: cursive;
+                    font-size: 20px;
+                    line-height: 24px;
+                    text-align: center;
+                    color: #404040;
+                    padding: 20px;
+                  }
+                  .text.txt-center {
+                    text-align: center;
+                  }
+                  .text a {
+                    color: #0fe4d2;
+                  }
+                  
+                  .has-animation {
+                    position: relative;
+                  }
+                  .has-animation p, .has-animation img {
+                    opacity: 0;
+                  }
+                  .has-animation.animate-in p, .has-animation.animate-in img {
+                    animation: textHidden 0.1s 1.1s forwards;
+                  }
+                  .has-animation.animate-in:before, .has-animation.animate-in:after {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    height: 100%;
+                    z-index: 10;
+                  }
+                  .has-animation.animate-in:before {
+                    background-color: teal;
+                  }
+                  .has-animation.animate-in:after {
+                    background-color: yellowgreen;
+                    animation-delay: .5s;
+                  }
+                  .has-animation.animation-ltr.animate-in:before {
+                    animation: revealLTR 1.8s ease;
+                  }
+                  .has-animation.animation-ltr.animate-in:after {
+                    animation: revealLTR 1s .6s ease;
+                  }
+                  .has-animation.animation-rtl.animate-in:before {
+                    animation: revealRTL 1.8s ease;
+                  }
+                  .has-animation.animation-rtl.animate-in:after {
+                    animation: revealRTL 1s .6s ease;
+                  }
+                  
+                  @keyframes revealRTL {
+                    0% {
+                      width: 0;
+                      right: 0;
+                    }
+                    65% {
+                      width: 100%;
+                      right: 0;
+                    }
+                    100% {
+                      width: 0;
+                      right: 100%;
+                    }
+                  }
+                  @keyframes revealLTR {
+                    0% {
+                      width: 0;
+                      left: 0;
+                    }
+                    65% {
+                      width: 100%;
+                      left: 0;
+                    }
+                    100% {
+                      width: 0;
+                      left: 100%;
+                    }
+                  }
+                  @keyframes textHidden {
+                    0% {
+                      opacity: 0;
+                    }
+                    100% {
+                      opacity: 1;
+                    }
+                  }
+
+                  .button {
+                    position: relative;
+                    -webkit-appearance: none;
+                       -moz-appearance: none;
+                            appearance: none;
+                    background: #f72359;
+                    padding: 0.7em 2em;
+                    border: none;
+                    color: white;
+                    font-size: 1.2em;
+                    cursor: pointer;
+                    outline: none;
+                    overflow: hidden;
+                    border-radius: 100px;
+                  }
+                  .button span {
+                    position: relative;
+                    pointer-events: none;
+                  }
+                  .button::before {
+                    --size: 0;
+                    content: '';
+                    position: absolute;
+                    left: var(--x);
+                    top: var(--y);
+                    width: var(--size);
+                    height: var(--size);
+                    background: radial-gradient(circle closest-side, #4405f7, transparent);
+                    -webkit-transform: translate(-50%, -50%);
+                            transform: translate(-50%, -50%);
+                    transition: width .2s ease, height .2s ease;
+                  }
+                  .button:hover::before {
+                    --size: 400px;
+                  }
+                  
+                  
+                	
+
+        </style>
+        <script>
+
+                $(document).ready(function() {
+                    $('.has-animation').each(function(index) {
+                      $(this).delay($(this).data('delay')).queue(function(){
+                        $(this).addClass('animate-in');
+                      });
+                    });
+                  });
+
+                  document.querySelector('.button').onmousemove = function (e) {
+
+                    var x = e.pageX - e.target.offsetLeft;
+                    var y = e.pageY - e.target.offsetTop;
+                
+                    e.target.style.setProperty('--x', x + 'px');
+                    e.target.style.setProperty('--y', y + 'px');
+                };
+                
+        </script>
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+        
+        <a class="navbar-brand" href="#">
+            <img src="./banner-main.png" alt="logo" width="40px"/>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="#">HOME</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">BLOG</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">MAYTREE SCHOOL</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">ABOUT US</a>
+            </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-logo mx-auto">
+                <li>
+                    <form class="form-inline" action="#">
+                        <input class="form-control mr-sm-2" type="text" placeholder="Search">
+                        <button class="btn btn-success" type="submit">
+                            <span class="fas fa-search"></span>
+                        </button>
+                    </form>
+                </li>
+              </ul>
+            <ul class="navbar-nav">
+            
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                        LOGIN 
+                    <span class="fas fa-user"> </span> 
+                </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <div id="back" class="row">
+          <div class="col-xl-5" id="logo">  
+          <img src="logo.png" id="logo"/>
+          </div>
+          <div class="col-xl-2 col-xl-5 text-center" >
+              <br><br><br>  
+              <div class="has-animation animation-ltr" data-delay="10">
+                    <p class="bigger">MAYTREE SCHOOL</p>
+                  </div>
+                    <div class="has-animation animation-rtl" data-delay="1000">
+                    <p class="text text-center"  >A Program for providing the opportunity for young students who want to build something instead of sitting in the classroom, for young entrepreneurs to build their startup in their limited budget, for new entrepreneurs to get mentors, for Entrepreneur to hire us for their projects.</p>
+                  </div>
+                    <button type="button" class="btn btn-success loading" >Apply Now
+                        <span class="fas fa-play"></span>
+                    </button>
+            </div>
+
+      </div>
+    <!-- <div id="container" style="width:100%; height:600px;">
+        <h6><b>Maytree School </b> gives an opportunity to young people to innovate and live your dreams instead of sitting in a classroom</h6>
+        </div> -->
+    <div id="demo" class="carousel slide" data-ride="carousel">
+
+         
+            <ul class="carousel-indicators">
+              <li data-target="#demo" data-slide-to="0" class="active"></li>
+              <li data-target="#demo" data-slide-to="1"></li>
+              <li data-target="#demo" data-slide-to="2"></li>
+            </ul>
+            
+           
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img src="first.jpg" alt="Los Angeles" width="100%" height="500">
+                    <div class="carousel-caption">
+                            <h3>ACCELARATE</h3>
+                            <p>Launch your startup in your limited budget with our experienced startup CEOs and rise fast skipping the failure curves</p>
+                            <button class="button">
+                                    <span>Let's go for it</span>
+                                </button>
+                    </div>
+              </div>
+              <div class="carousel-item">
+                <img src="fourth.jpg" alt="Chicago" width="100%" height="500">
+                    <div class="carousel-caption">
+                            <h3>Maytree Innovate</h3>
+                            <p>Do you need experts to make your dream project for you while you sit 
+                            back and work on your product? If so you can hire us for the optimum results.   
+                              </p>
+                              <button class="button">
+                                    <span>Hire Us</span>
+                                </button>
+                    </div>
+              </div>
+              <div class="carousel-item">
+                <img src="third.jpg" alt="New York" width="100%" height="500">
+                    <div class="carousel-caption">
+                            <h3>Empower</h3>
+                            <p>Learn Entrepreneurship from Rohit Kashyap and our mentors who would help you reach your maximum potential.   </p>
+                            <button class="button">
+                                    <span>Learn Entrepreneurships</span>
+                                </button>
+                    </div>
+              </div>
+            </div>
+            
+            
+            <a class="carousel-control-prev" href="#demo" data-slide="prev">
+              <span class="carousel-control-prev-icon"></span>
+            </a>
+            <a class="carousel-control-next" href="#demo" data-slide="next">
+              <span class="carousel-control-next-icon"></span>
+            </a>
+        </div>
+        <br/><br/>
+    <div class="container fluid" >
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="card"   >
+                        <img class="card-img-top" src="image1.jpg" alt="Card image">
+                        <div class="card-body">
+                            <h4 class="card-title">5 Golden habits can always help you to change your life.<br><small>BY ROHIT KASHYAP</small></h4>
+                            <p class="card-text">There can be millions of habit that can make someone successful but these 5 Golden habits ...</p>
+                            <a href="#" class="btn btn-primary">READ MORE</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-4">
+                        <div class="card"  >
+                            <img class="card-img-top" src="image1.jpg" alt="Card image">
+                            <div class="card-body">
+                                <h4 class="card-title">Do you know there are 18 million-odd Deaf people across India?<br><small>BY ROHIT KASHYAP</small></h4>
+                                <p class="card-text">Do you know there are 18 million-odd Deaf people across India?That is a really big ....</p>
+                                <a href="#" class="btn btn-primary">READ MORE</a>
+                            </div>
+                        </div>
+                </div>
+
+                <div class="col-sm-4">
+                        <div class="card"   >
+                            <img class="card-img-top" src="image1.jpg" alt="Card image">
+                            <div class="card-body">
+                                <h4 class="card-title">From A classroom teacher to Newest Billionaire Of India.<br><small>BY ROHIT KASHYAP</small></h4>
+                                <p class="card-text">After Graduating, Byju Raveendran secured a job as a ‘Service Engineer’ at a multinati...</p>
+                                <a href="#" class="btn btn-primary">READ MORE</a>
+                             </div>
+                        </div>
+                </div>
+            </div>
+            <br>
+            <div class="row">     
+                    <div class="col-sm-4">
+                            <div class="card" ]  >
+                                <img  src="image1.jpg" alt="Card image">
+                                <div class="card-body">
+                                    <h4 class="card-title">What are the habits of highly successful people?<br><small>BY ROHIT KASHYAP</small></h4>
+                                    <p class="card-text">There was a very brilliant boy, He always scored 100% in Science. Got Selected for IIT....</p>
+                                    <a href="#" class="btn btn-primary">READ MORE</a>
+                                </div>
+                            </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                            <div class="card" >
+                                    <img     src="image1.jpg" alt="Card image">
+                                    <div class="card-body">
+                                        <h4 class="card-title">Why should I not complain in life?<br><small>BY ROHIT KASHYAP</small></h4>
+                                        <p class="card-text">There was a kid, Who was born in a poor family with an income of less than 20k per annum. ....</p>
+                                        <a href="#" class="btn btn-primary">READ MORE</a>
+                                    </div>
+                            </div>
+                    </div>
+            </div>
+    </div>
+    <br/><br/>
+    <div class="footer-clean" style="background: whitesmoke">
+            <footer>
+            <div class="container">
+            <div class="row justify-content-center">
+            <div class="col-sm-4 col-md-3 item">
+            <h4>Essentials</h4 >
+            <ul>
+            <li><a href="#">Contact Us</a></li>
+            <li><a href="#">Terms and Conditions</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Join Us</a></li>
+            </ul>
+            </div>
+            <div class="col-sm-4 col-md-3 item">
+            <h4>Our vision</h4>
+            
+            <a>Our vision is to change the life of all the students who are hungry for success. That's why you're here today.</a>
+           
+            </div>
+            <div class="col-sm-4 col-md-3 item col-md-6">
+            <h4 class="text-uppercase">STAY UPDATED TO LATEST NEWS</h4>
+            <div class="input-group">
+            <div class="input-group-prepend"></div><input class="form-control" type="text" placeholder="Email address" style="border-radius: 0;">
+            <div class="input-group-append"><button class="btn btn-primary" type="button" style="border-radius: 0;background: black;">Subscribe</button></div>
+            </div>
+            </div>
+            <hr style='width: 100%'>
+            <div class="col-lg-3 text-center" style='margin-left: -200px'>
+            <a href="#"><span style="font-size:20px; padding:5px;"  class="fab fa-facebook"></span></a>
+            <a  href="#"><span style="font-size:20px; padding:5px;" class="fab fa-instagram"></span></a>
+            <a  href="#"><span style="font-size:20px; padding:5px;" class="fab fa-quora"></span></a>
+            <br>
+            <p class="copyright" style='text-align:center; width: 100%'> Maytree &copy; 2019</p>
+            </div>
+            </div>
+            </div>
+            </footer>
+    </div>
+</body>
+</html>
